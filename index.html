@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+<meta name="description" content="OBSIDIAN NOC - Network Operations & Intelligence Platform">
+<title>OBSIDIAN NOC | Network Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar" id="sidebar">
+<div class="brand">
+  <div class="brand-symbol">
+    <i data-lucide="radio-tower"></i>
+  </div>
+
+  <div class="brand-name">
+    <b>OBSIDIAN<span>NOC</span></b>
+    <small>NETWORK INTELLIGENCE</small>
+  </div>
+
+  <button class="icon-button" id="collapseSidebar" title="طي القائمة">
+    <i data-lucide="panel-right-close"></i>
+  </button>
+</div>
+      <div class="environment"><span class="pulse"></span><div><b>Demo Network</b><small>SIMULATED ENVIRONMENT</small></div></div>
+      <div class="nav-caption">مركز العمليات</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="overview"><i data-lucide="layout-dashboard"></i><span>النظرة العامة</span></button>
+        <button class="nav-link" data-page="map"><i data-lucide="map"></i><span>الخريطة الجغرافية</span></button>
+        <button class="nav-link" data-page="performance"><i data-lucide="activity"></i><span>أداء RF</span></button>
+        <button class="nav-link" data-page="qos"><i data-lucide="gauge"></i><span>جودة الخدمة QoS</span></button>
+        <button class="nav-link" data-page="capacity"><i data-lucide="chart-no-axes-combined"></i><span>السعة وحركة البيانات</span></button>
+        <button class="nav-link" data-page="sites"><i data-lucide="radio-tower"></i><span>المحطات والخلايا</span><em id="siteCount">12</em></button>
+        <button class="nav-link" data-page="incidents"><i data-lucide="siren"></i><span>الإنذارات</span><em class="nav-alert" id="alarmCount">3</em></button>
+      </nav>
+      <div class="nav-caption">الإدارة</div>
+      <nav class="nav-menu">
+        <button class="nav-link" data-page="reports"><i data-lucide="file-chart-column"></i><span>التقارير والتصدير</span></button>
+        <button class="nav-link" data-page="settings"><i data-lucide="settings-2"></i><span>الإعدادات والصلاحيات</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="avatar">MN</div><div class="user-meta"><b id="userName">Network Operator</b><small id="userRole">OPERATOR</small></div><button class="icon-button" id="roleSwitch" title="تغيير الدور التجريبي"><i data-lucide="users"></i></button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left"><button class="icon-button mobile-toggle" id="mobileToggle"><i data-lucide="menu"></i></button><div class="crumb"><span>OBSIDIAN /</span><b id="crumbCurrent">النظرة العامة</b></div></div>
+        <div class="topbar-right">
+          <label class="search"><i data-lucide="search"></i><input id="globalSearch" placeholder="ابحث عن محطة أو إنذار..." autocomplete="off"></label>
+          <span class="connection"><i></i><span id="connectionText">SIMULATED LIVE</span></span>
+          <button class="icon-button" id="pauseLive" title="إيقاف/استئناف التحديث"><i data-lucide="pause"></i></button>
+          <button class="icon-button" id="themeToggle" title="تبديل المظهر"><i data-lucide="sun-moon"></i></button>
+          <button class="primary-button small" id="exportButton"><i data-lucide="download"></i> تصدير</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="page-heading"><div><div class="eyebrow">NETWORK OPERATIONS CENTER <span class="tag">V2.0</span></div><h1 id="pageTitle">مركز مراقبة الشبكة</h1><p id="pageDescription">صورة تشغيلية موحدة لشبكة النفاذ والنقل وجودة الخدمة.</p></div><div class="heading-tools"><span class="last-update">آخر تحديث <b id="lastUpdate">الآن</b></span><select id="timeRange" aria-label="الفترة الزمنية"><option value="1h">آخر ساعة</option><option value="24h" selected>آخر 24 ساعة</option><option value="7d">آخر 7 أيام</option><option value="30d">آخر 30 يوماً</option></select></div></div>
+
+        <section class="view active" id="view-overview">
+          <div class="kpi-grid">
+            <article class="kpi"><div class="kpi-label">توافر الشبكة <i data-lucide="shield-check"></i></div><strong id="kpiAvailability">99.94%</strong><div class="kpi-foot"><span class="positive">↑ 0.08%</span><small>Network Availability</small></div></article>
+            <article class="kpi"><div class="kpi-label">المحطات المتصلة <i data-lucide="radio-tower"></i></div><strong id="kpiSites">10 / 12</strong><div class="kpi-foot"><span class="positive">83.3%</span><small>Connected Sites</small></div></article>
+            <article class="kpi"><div class="kpi-label">متوسط زمن الاستجابة <i data-lucide="timer"></i></div><strong id="kpiLatency">34.8 <small>ms</small></strong><div class="kpi-foot"><span class="positive">↓ 3.2%</span><small>End-to-End Latency</small></div></article>
+            <article class="kpi"><div class="kpi-label">إنذارات غير محلولة <i data-lucide="siren"></i></div><strong id="kpiAlarms">3</strong><div class="kpi-foot"><span class="negative">تحتاج متابعة</span><small>Open Incidents</small></div></article>
+          </div>
+          <div class="grid-two overview-main">
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>حركة مرور الشبكة</h2><p>متوسط معدل النقل عبر شبكة النفاذ</p></div><span class="unit-pill">Gbps</span></div><div class="chart-box"><canvas id="overviewTraffic"></canvas></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>حالة المواقع</h2><p>التوزيع حسب الحالة التشغيلية</p></div></div><div class="chart-box donut"><canvas id="siteStatusChart"></canvas></div><div class="legend-list" id="statusLegend"></div></article>
+          </div>
+          <div class="grid-two">
+            <article class="panel"><div class="panel-heading"><div><h2>خريطة انتشار المحطات</h2><p>المواقع التجريبية ضمن الأراضي السورية</p></div><button class="text-button" data-navigate="map">فتح الخريطة ←</button></div><div id="overviewMap" class="map-box compact-map"></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>الإنذارات النشطة</h2><p>أعلى الأحداث حسب مستوى الخطورة</p></div><button class="text-button" data-navigate="incidents">عرض الكل ←</button></div><div id="overviewAlarms" class="alarm-list"></div></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-map">
+          <div class="section-intro"><div><h2>الخريطة الجغرافية للشبكة</h2><p>حدد أي محطة لفتح لوحة مؤشرات الأداء الخاصة بها.</p></div><div class="map-legend"><span><i class="dot green"></i> متصلة</span><span><i class="dot amber"></i> أداء منخفض</span><span><i class="dot red"></i> منقطعة / حرجة</span></div></div>
+          <div class="panel map-panel"><div id="networkMap" class="map-box full-map"></div></div>
+          <div class="site-mini-grid" id="mapSiteCards"></div>
+        </section>
+
+        <section class="view" id="view-performance">
+          <div class="kpi-grid four">
+            <article class="kpi"><div class="kpi-label">متوسط RSRP <i data-lucide="signal"></i></div><strong id="rfRsrp">-94.2 <small>dBm</small></strong><div class="kpi-foot"><small>Reference Signal Received Power</small></div></article>
+            <article class="kpi"><div class="kpi-label">متوسط RSRQ <i data-lucide="activity"></i></div><strong id="rfRsrq">-11.8 <small>dB</small></strong><div class="kpi-foot"><small>Reference Signal Received Quality</small></div></article>
+            <article class="kpi"><div class="kpi-label">متوسط SINR <i data-lucide="radio"></i></div><strong id="rfSinr">17.6 <small>dB</small></strong><div class="kpi-foot"><small>Signal to Interference + Noise</small></div></article>
+            <article class="kpi"><div class="kpi-label">متوسط CQI <i data-lucide="bar-chart-3"></i></div><strong id="rfCqi">10.4 <small>/ 15</small></strong><div class="kpi-foot"><small>Channel Quality Indicator</small></div></article>
+          </div>
+          <div class="grid-two"><article class="panel"><div class="panel-heading"><div><h2>مؤشرات جودة الإشارة</h2><p>توزيع متوسطات مؤشرات RF</p></div><span class="unit-pill">Demo values</span></div><div class="chart-box tall"><canvas id="rfChart"></canvas></div></article><article class="panel"><div class="panel-heading"><div><h2>تقييم جودة الراديو</h2><p>تصنيف المحطات حسب SINR</p></div></div><div id="rfQualityList" class="quality-list"></div></article></div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>مؤشرات RF لكل محطة</h2><p>قيم تجريبية تمثل متوسطات الخلايا بالموقع</p></div><button class="outline-button" id="exportRf">تصدير CSV</button></div><div class="table-scroll"><table><thead><tr><th>المحطة</th><th>التقنية</th><th>RSRP</th><th>RSRQ</th><th>SINR</th><th>CQI</th><th>التقييم</th></tr></thead><tbody id="rfTable"></tbody></table></div></article>
+        </section>
+
+        <section class="view" id="view-qos">
+          <div class="kpi-grid four">
+            <article class="kpi"><div class="kpi-label">Latency <i data-lucide="timer"></i></div><strong id="qosLatency">34.8 <small>ms</small></strong><div class="kpi-foot"><small>Round Trip Time</small></div></article>
+            <article class="kpi"><div class="kpi-label">Jitter <i data-lucide="activity"></i></div><strong id="qosJitter">4.2 <small>ms</small></strong><div class="kpi-foot"><small>Packet Delay Variation</small></div></article>
+            <article class="kpi"><div class="kpi-label">Packet Loss <i data-lucide="package-x"></i></div><strong id="qosLoss">0.38 <small>%</small></strong><div class="kpi-foot"><small>Lost packets ratio</small></div></article>
+            <article class="kpi"><div class="kpi-label">Availability <i data-lucide="shield-check"></i></div><strong>99.94<small>%</small></strong><div class="kpi-foot"><small>Service uptime</small></div></article>
+          </div>
+          <div class="grid-two"><article class="panel"><div class="panel-heading"><div><h2>مؤشرات QoS عبر الزمن</h2><p>Latency وJitter وPacket Loss</p></div><span class="unit-pill">Last 24h</span></div><div class="chart-box tall"><canvas id="qosChart"></canvas></div></article><article class="panel"><div class="panel-heading"><div><h2>مؤشر تجربة المستخدم QoE</h2><p>تقدير تجريبي مركب لجودة الخدمة</p></div></div><div class="qoe-score"><strong id="qoeScore">86</strong><span>/ 100</span><b>جيد جداً</b></div><div id="qoeBreakdown" class="metric-bars"></div></article></div>
+        </section>
+
+        <section class="view" id="view-capacity">
+          <div class="kpi-grid four">
+            <article class="kpi"><div class="kpi-label">Downlink Throughput <i data-lucide="arrow-down"></i></div><strong id="capDown">6.84 <small>Gbps</small></strong><div class="kpi-foot"><small>Aggregate DL</small></div></article>
+            <article class="kpi"><div class="kpi-label">Uplink Throughput <i data-lucide="arrow-up"></i></div><strong id="capUp">2.72 <small>Gbps</small></strong><div class="kpi-foot"><small>Aggregate UL</small></div></article>
+            <article class="kpi"><div class="kpi-label">متوسط PRB Utilization <i data-lucide="chart-column"></i></div><strong id="capPrb">67.4 <small>%</small></strong><div class="kpi-foot"><small>Radio Resource Usage</small></div></article>
+            <article class="kpi"><div class="kpi-label">المستخدمون النشطون <i data-lucide="users"></i></div><strong id="capUsers">72,480</strong><div class="kpi-foot"><small>Connected Subscribers</small></div></article>
+          </div>
+          <div class="grid-two"><article class="panel"><div class="panel-heading"><div><h2>استهلاك السعة</h2><p>Downlink / Uplink throughput</p></div></div><div class="chart-box tall"><canvas id="capacityChart"></canvas></div></article><article class="panel"><div class="panel-heading"><div><h2>استخدام موارد الراديو PRB</h2><p>نسبة استهلاك الموارد لكل محطة</p></div></div><div class="chart-box tall"><canvas id="prbChart"></canvas></div></article></div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>المحطات الأعلى حملاً</h2><p>المواقع التي تقترب من حدود السعة</p></div></div><div class="table-scroll"><table><thead><tr><th>المحطة</th><th>التقنية</th><th>PRB DL</th><th>DL Mbps</th><th>UL Mbps</th><th>المستخدمون</th><th>الحالة</th></tr></thead><tbody id="capacityTable"></tbody></table></div></article>
+        </section>
+
+        <section class="view" id="view-sites">
+          <div class="section-intro"><div><h2>سجل المحطات والمواقع</h2><p>ابحث وصفّ وفرز بيانات البنية التحتية.</p></div><button class="outline-button" id="exportSites">تصدير CSV</button></div>
+          <div class="panel table-panel"><div class="table-toolbar"><input id="siteSearch" placeholder="بحث بالاسم أو المعرّف أو المنطقة..."><select id="siteStatus"><option value="all">جميع الحالات</option><option value="online">متصل</option><option value="degraded">أداء منخفض</option><option value="offline">منقطع</option><option value="critical">حرج</option></select><span id="siteResultCount"></span></div><div class="table-scroll"><table><thead><tr><th data-sort="id">Site ID ↕</th><th data-sort="name">اسم المحطة ↕</th><th data-sort="region">المنطقة ↕</th><th data-sort="technology">التقنية ↕</th><th data-sort="availability">Availability ↕</th><th data-sort="latency">Latency ↕</th><th data-sort="prb">PRB ↕</th><th>الحالة</th></tr></thead><tbody id="sitesTable"></tbody></table></div></div>
+        </section>
+
+        <section class="view" id="view-incidents">
+          <div class="section-intro"><div><h2>إدارة الإنذارات والحوادث</h2><p>متابعة الأحداث وتغيير حالتها وفق صلاحية المستخدم.</p></div><button class="outline-button" id="exportIncidents">تصدير CSV</button></div>
+          <div class="panel table-panel"><div class="table-toolbar"><input id="incidentSearch" placeholder="بحث بالإنذار أو المحطة أو النوع..."><select id="incidentStatus"><option value="all">كل الحالات</option><option value="open">مفتوح</option><option value="investigating">قيد المعالجة</option><option value="resolved">تم الحل</option></select><select id="incidentSeverity"><option value="all">كل مستويات الخطورة</option><option value="critical">حرج</option><option value="major">مرتفع</option><option value="minor">متوسط</option><option value="warning">تحذير</option></select><span id="incidentResultCount"></span></div><div class="table-scroll"><table><thead><tr><th>Alarm ID</th><th>المحطة</th><th>النوع</th><th>الخطورة</th><th>الحالة</th><th>العمر</th><th>المسؤول</th><th>إجراء</th></tr></thead><tbody id="incidentsTable"></tbody></table></div></div>
+        </section>
+
+        <section class="view" id="view-reports">
+          <div class="section-intro"><div><h2>التقارير والتصدير</h2><p>إنشاء ملفات CSV وملخص تشغيلي نصي من بيانات العرض الحالية.</p></div></div>
+          <div class="report-grid"><article class="panel report-card"><i data-lucide="file-spreadsheet"></i><h3>تقرير المحطات</h3><p>قائمة المواقع ومؤشرات الاتصال والتغطية والسعة.</p><button class="primary-button" id="reportSites">تنزيل CSV</button></article><article class="panel report-card"><i data-lucide="siren"></i><h3>تقرير الإنذارات</h3><p>سجل الحوادث والخطورة والحالة وفريق المعالجة.</p><button class="primary-button" id="reportAlarms">تنزيل CSV</button></article><article class="panel report-card"><i data-lucide="file-text"></i><h3>ملخص تنفيذي</h3><p>ملخص KPIs والحالة العامة والإنذارات المفتوحة.</p><button class="primary-button" id="reportSummary">تنزيل TXT</button></article></div>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="grid-two"><article class="panel settings-card"><h2>إعدادات المحاكاة</h2><p>تتحكم هذه الخيارات في مصدر البيانات التجريبي.</p><label class="setting-row"><span><b>التحديث التلقائي</b><small>تحديث المؤشرات كل 5 ثوانٍ</small></span><input type="checkbox" id="autoRefresh" checked></label><label class="setting-row"><span><b>سرعة التغير</b><small>شدة التذبذب في قيم المؤشرات</small></span><select id="simulationSpeed"><option value="low">منخفضة</option><option value="normal" selected>طبيعية</option><option value="high">مرتفعة</option></select></label><label class="setting-row"><span><b>إعادة البيانات الافتراضية</b><small>إرجاع جميع السجلات إلى الحالة الأصلية</small></span><button class="outline-button" id="resetData">إعادة الضبط</button></label></article><article class="panel settings-card"><h2>الأدوار والصلاحيات</h2><p>نموذج واجهة لصلاحيات RBAC. لا يمثل نظام مصادقة آمن بعد.</p><div class="role-card"><b>Administrator</b><span>قراءة + تعديل + إدارة الإعدادات</span></div><div class="role-card"><b>Operator</b><span>قراءة + معالجة الإنذارات</span></div><div class="role-card"><b>Viewer</b><span>قراءة فقط + تصدير التقارير</span></div><div class="role-note">الدور الحالي: <b id="currentRole">Operator</b> — غيّره من أسفل القائمة الجانبية.</div></article></div>
+          <article class="panel integration-card"><div class="panel-heading"><div><h2>حالة تكامل البيانات</h2><p>مصدر البيانات الحالي ونقاط الربط المستقبلية.</p></div><span class="demo-badge">DEMO MODE</span></div><div class="integration-list"><div><b>Mock Data Provider</b><span class="state-on">نشط</span></div><div><b>REST API Adapter</b><span class="state-off">غير موصول</span></div><div><b>WebSocket Stream</b><span class="state-off">محاكاة محلية</span></div><div><b>SNMP / OSS Collector</b><span class="state-off">غير موصول</span></div></div></article>
+        </section>
+      </section>
+    </main>
+
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="detail-drawer" id="detailDrawer" aria-hidden="true"><div class="drawer-head"><div><small>NETWORK ELEMENT DETAILS</small><h2 id="drawerTitle">تفاصيل المحطة</h2></div><button class="icon-button" id="closeDrawer"><i data-lucide="x"></i></button></div><div class="drawer-body" id="drawerBody"></div><div class="drawer-actions" id="drawerActions"></div></aside>
+    <div id="toastRegion" class="toast-region"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

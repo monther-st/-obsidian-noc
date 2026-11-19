@@ -116,7 +116,13 @@ function bind(){
  $$("[data-navigate]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.navigate)));
  $("#themeToggle").addEventListener("click",()=>setTheme(state.theme==="dark"?"light":"dark"));
  $("#collapseSidebar").addEventListener("click",()=>$("#sidebar").classList.toggle("collapsed"));
- $("#mobileToggle").addEventListener("click",()=>$("#sidebar").classList.toggle("mobile-open"));
+
+$("#mobileToggle").addEventListener("click", () => {
+  const sidebar = $("#sidebar");
+
+  sidebar.classList.remove("collapsed");
+  sidebar.classList.toggle("mobile-open");
+});
  $("#pauseLive").addEventListener("click",()=>{state.live=!state.live;$("#pauseLive").innerHTML=`<i data-lucide="${state.live?"pause":"play"}"></i>`;$("#connectionText").textContent=state.live?"SIMULATED LIVE":"PAUSED";icons();toast(state.live?"استؤنف التحديث التجريبي":"تم إيقاف التحديث");});
  $("#globalSearch").addEventListener("keydown",e=>{if(e.key!=="Enter")return;const q=e.target.value.toLowerCase();const s=state.sites.find(x=>`${x.id} ${x.name} ${x.region}`.toLowerCase().includes(q));const i=state.incidents.find(x=>`${x.id} ${x.site} ${x.type}`.toLowerCase().includes(q));if(s)openSite(s.id);else if(i)openIncident(i.id);else toast("لم يتم العثور على نتيجة","error");});
  $("#siteSearch").addEventListener("input",e=>{state.siteQuery=e.target.value;renderSites();});

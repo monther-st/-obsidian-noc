@@ -58,10 +58,21 @@ function periodTraffic(){
 }
 function renderOverview(){
  const active=state.sites.filter(s=>s.status==="online").length,open=state.incidents.filter(i=>i.status!=="resolved").length;
- const availability=avg(state.sites,"availability"),latency=operationalAvg("latency");
- $("#kpiAvailability").textContent=displayMetric(availability,2)+"%";
- $("#kpiAvailability").title="متوسط Availability التاريخي لجميع المحطات التي تتوفر لها بيانات، وليس نسبة المحطات المتصلة حالياً";
+const onlineRate = state.sites.length
+  ? (active / state.sites.length) * 100
+  : null;
+
+const latency = operationalAvg("latency");
+
+$("#kpiAvailability").textContent = displayMetric(onlineRate, 2) + "%";
+$("#kpiAvailability").title =
+  `نسبة المحطات المتصلة حالياً: ${active} من أصل ${state.sites.length}`;
  $("#kpiSites").textContent=`${active} / ${state.sites.length}`;
+ const connectedRatio = state.sites.length
+  ? (active / state.sites.length) * 100
+  : 0;
+
+$("#kpiSitesRatio").textContent = connectedRatio.toFixed(2) + "%";
  $("#kpiSites").title="عدد المحطات ذات الحالة Online حالياً / إجمالي المحطات";
  $("#kpiLatency").innerHTML=`${displayMetric(latency,1)} <small>ms</small>`;
  $("#kpiAlarms").textContent=open;$("#alarmCount").textContent=open;$("#siteCount").textContent=state.sites.length;
